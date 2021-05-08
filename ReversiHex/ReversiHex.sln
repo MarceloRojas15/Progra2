@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31129.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ReversiHex", "ReversiHex\ReversiHex.vcxproj", "{E8279C17-DA87-4A5C-A588-F3422E264FCE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PruebasTableroReversiHex", "PruebasTableroReversiHex\PruebasTableroReversiHex.vcxproj", "{38219B72-3768-47E0-ACA3-550269C8066B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E8279C17-DA87-4A5C-A588-F3422E264FCE}.Debug|x64.ActiveCfg = Debug|x64
+		{E8279C17-DA87-4A5C-A588-F3422E264FCE}.Debug|x64.Build.0 = Debug|x64
+		{E8279C17-DA87-4A5C-A588-F3422E264FCE}.Debug|x86.ActiveCfg = Debug|Win32
+		{E8279C17-DA87-4A5C-A588-F3422E264FCE}.Debug|x86.Build.0 = Debug|Win32
+		{E8279C17-DA87-4A5C-A588-F3422E264FCE}.Release|x64.ActiveCfg = Release|x64
+		{E8279C17-DA87-4A5C-A588-F3422E264FCE}.Release|x64.Build.0 = Release|x64
+		{E8279C17-DA87-4A5C-A588-F3422E264FCE}.Release|x86.ActiveCfg = Release|Win32
+		{E8279C17-DA87-4A5C-A588-F3422E264FCE}.Release|x86.Build.0 = Release|Win32
+		{38219B72-3768-47E0-ACA3-550269C8066B}.Debug|x64.ActiveCfg = Debug|x64
+		{38219B72-3768-47E0-ACA3-550269C8066B}.Debug|x64.Build.0 = Debug|x64
+		{38219B72-3768-47E0-ACA3-550269C8066B}.Debug|x86.ActiveCfg = Debug|Win32
+		{38219B72-3768-47E0-ACA3-550269C8066B}.Debug|x86.Build.0 = Debug|Win32
+		{38219B72-3768-47E0-ACA3-550269C8066B}.Release|x64.ActiveCfg = Release|x64
+		{38219B72-3768-47E0-ACA3-550269C8066B}.Release|x64.Build.0 = Release|x64
+		{38219B72-3768-47E0-ACA3-550269C8066B}.Release|x86.ActiveCfg = Release|Win32
+		{38219B72-3768-47E0-ACA3-550269C8066B}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9687A080-0632-4E4D-B2AC-35F1FDC93113}
+	EndGlobalSection
+EndGlobal

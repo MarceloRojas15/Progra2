@@ -1,0 +1,2 @@
+﻿  test.cpp
+C:\Users\Zuri\source\repos\ReversiHex\ReversiHexPruebas\test.cpp(13,40): error C2600: 'ReversiHexPruebas::ReversiHexPruebas': no se puede definir una función miembro especial generada por el compilador (se debe declarar primero en la clase)
