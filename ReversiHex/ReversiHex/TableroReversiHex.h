@@ -275,10 +275,207 @@ bool TableroReversiHex::verFlanqueaDir(int dir, int c, int p, Ficha color) const
 	assert((0 <= p) && ((c % 2 == 0) && (p < N) || (c % 2 == 1) && (p < N - 1)));
 	assert(color != nula);
 	bool resultado = false;
+	bool encuentra_color = false;
+	bool encuentra_otro_color = false;
+	Ficha otro_color;
 
-	// código para determinar si hay flanqueo o no
+	// determina cuál es el otro color
+	if (color == negra)
+		otro_color = blanca;
+	else otro_color = negra;
 
-	return resultado;
+
+	int i = c;
+	int j = p;
+
+	switch (dir) {
+	
+	case 0: // diagonal ascendente_Der
+		
+
+		while (i < N && j >= 0) {
+
+			if(i % 2 == 0) {
+				
+				if (columnas[i + 1][j - 1].cf == otro_color) {
+					encuentra_otro_color = true;
+					i++;
+					j--;
+				}
+				else {
+					break;
+				}
+			}
+			else {
+				if (columnas[i + 1][j].cf == otro_color) {
+					encuentra_otro_color = true;
+					i += 1;
+				}
+				else {
+					break;
+				}
+			}
+		}
+
+
+		if (i == N) {
+			if (columnas[i][j].cf == color && encuentra_otro_color) {
+				return true;
+			}
+		}else if (i < N) {
+			if (columnas[i + 1][j].cf == color && encuentra_otro_color) {
+				return true;
+			}
+		} else {
+			return false;
+		}
+		break;
+	
+	case 1: // derecha
+
+
+		while (i < N && (columnas[i + 2][p].cf == otro_color)) {
+			encuentra_otro_color = true;
+			i += 2;
+		}
+		if (i == N) {
+			if (columnas[i][p].cf == color && encuentra_otro_color) {
+				return true;
+			}
+		}
+		if (i < N) {
+			if (columnas[i + 2][p].cf == color && encuentra_otro_color) {
+				return true;
+			}
+		}
+		else {
+			return false;
+		}
+		break;
+
+
+
+	case 2: // diagonal descendente_Der
+
+		while (i < N && j < N && (columnas[i + 1][j].cf == otro_color)) {
+			encuentra_otro_color = true;
+			i += 1;
+
+			if (i % 2 != 0) {
+				j += 1;
+			}
+		}
+
+		if (i == N) {
+			if (columnas[i][j].cf == color && encuentra_otro_color) {
+				return true;
+			}
+		}
+
+		if (i < N) {
+			if (columnas[i+1][j].cf == color && encuentra_otro_color) {
+				return true;
+			}
+		}
+		else {
+			return false;
+		}
+		break;
+
+	case 3: // diagonal ascendente_Izq
+
+
+		while (i > 0 && j >= 0) {
+
+			if (i % 2 == 0) {
+
+				if (columnas[i - 1][j - 1].cf == otro_color) {
+					encuentra_otro_color = true;
+					i--;
+					j--;
+				}
+				else {
+					break;
+				}
+			}
+			else {
+				if (columnas[i - 1][j].cf == otro_color) {
+					encuentra_otro_color = true;
+					i--;
+				}
+				else {
+					break;
+				}
+			}
+		}
+
+
+		if (i == N) {
+			if (columnas[i][j].cf == color && encuentra_otro_color) {
+				return true;
+			}
+		}
+		else if (i > 0) {
+			if (columnas[i - 1][j].cf == color && encuentra_otro_color) {
+				return true;
+			}
+		}
+		else {
+			return false;
+		}
+		break;
+	
+	case 4: // izquierda
+
+		while (i > 0 && (columnas[i - 2][p].cf == otro_color)) {
+			encuentra_otro_color = true;
+			i -= 2;
+		}
+		if (i == 0) {
+			if (columnas[i][p].cf == color && encuentra_otro_color) {
+				return true;
+			}
+		}
+		if (i > 0) {
+			if (columnas[i - 2][p].cf == color && encuentra_otro_color) {
+				return true;
+			}
+		}
+		else {
+			return false;
+		}
+		break;
+
+
+	case 5: // diagonal descendente_Izq
+		while (i > 0 && j < N && (columnas[i - 1][j].cf == otro_color)) {
+			encuentra_otro_color = true;
+			i--;
+
+			if (i % 2 != 0) {
+				j++;
+			}
+		}
+
+		if (i == 0) {
+			if (columnas[i][j].cf == color && encuentra_otro_color) {
+				return true;
+			}
+		}
+
+		if (i > 0) {
+			if (columnas[i - 1][j].cf == color && encuentra_otro_color) {
+				return true;
+			}
+		}
+		else {
+			return false;
+		}
+		break;
+	
+	default:
+		break;
+	}
 }
 
 void TableroReversiHex::flanqueaDir(int dir, int c, int p, TableroReversiHex::Ficha color)
@@ -297,6 +494,103 @@ void TableroReversiHex::flanqueaDir(int dir, int c, int p, TableroReversiHex::Fi
 
 	// código para flanquear en la dirección dir:
 
+	switch (dir) {
+		case 0: // diagonal ascendente_Der
+
+			int pp = 0;
+
+			if (c % 2 == 0) {
+				pp = p - 1;
+			}
+			else {
+				pp = p;
+			}
+
+
+			int cc = c + 1;
+			while ((pp > 0) && (cc < N) && (columnas[cc][pp].cf == otro_color))
+			{
+				columnas[cc][pp].cf = color;
+				if (cc % 2 == 0) {
+					pp--;
+				}
+				cc = cc + 2;
+			}
+
+
+
+			break;
+		case 1: // derecha
+			int cc = c + 2;
+			while ((cc < N) && columnas[cc+2][p].cf == otro_color) {
+				columnas[cc][p].cf = color;
+				cc = cc + 2;
+			}
+			break;
+		
+		
+		case 2: // diagonal descendente_Der
+
+			int cc = c+1;
+			int pp = p+1;
+			while ((pp < N) && (cc < N) && (columnas[cc][pp].cf == otro_color))
+			{
+				columnas[cc][pp].cf = color;
+				if (cc % 2 != 0) {
+					pp++;
+				}
+				cc = cc + 2;
+			}
+			break;
+		
+		case 3: // diagonal descendente_Izq
+
+			int cc = c - 1;
+			int pp = p + 1;
+			while ((pp < N) && (cc > 0) && (columnas[cc][pp].cf == otro_color))
+			{
+				columnas[cc][pp].cf = color;
+				if (cc % 2 != 0) {
+					pp++;
+				}
+				cc = cc -2;
+			}
+
+			break;
+		
+		case 4:// izquierda
+			int cc = c - 2;
+			while ((cc >= 0) && columnas[cc-2][p].cf == otro_color) {
+				columnas[cc][p].cf = color;
+				cc = cc - 2;
+			}
+			break;
+
+		case 5: //diagonal ascendente_Izq
+
+			int pp = 0;
+
+			if (c % 2 == 0) {
+				pp = p - 1;
+			}
+			else {
+				pp = p;
+			}
+
+
+			int cc = c - 1;
+			while ((pp > 0) && (cc > 0) && (columnas[cc][pp].cf == otro_color))
+			{
+				columnas[cc][pp].cf = color;
+				if (cc % 2 == 0) {
+					pp--;
+				}
+				cc = cc - 2;
+			}
+			break;
+	
+	
+	}
 }
 
 void TableroReversiHex::generarLstAdys(int c, int p, LstAdys& lst)

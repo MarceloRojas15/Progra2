@@ -3,5 +3,20 @@
   <Executable>C:\Users\Zuri\source\repos\ReversiHex\Debug\PruebasTableroReversiHex.exe</Executable>
   <TestDurations>
     <TestDuration Test="PruebasTableroReversiHex.InicializacionCorrecta" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.ColocarYObservarDichaFicha" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.ColocarYLuegoObservarFicha" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_izq" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_der" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_derDesc" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_derAsc" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_derDesc_Esquina" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_derDesc_Interna" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_derAsc2" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_izqDesc1" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_derAscBorde" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_derAscInterna" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_izqDesc_Esquina" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_izqAsc_Esquina" Duration="1" />
   </TestDurations>
 </GtaTestDurations>
