@@ -60,7 +60,7 @@ public:
 	// EFE: retorna una hilera apropiada para desplegar el estado del juego por consola.
 	string toString() const;
 
-//private:
+private:
 
 	/* Métodos observadores de flanqueo privados, se invocarán desde "validarJugada()" */
 
@@ -153,13 +153,31 @@ TableroReversiHex::~TableroReversiHex()
 }
 
 bool TableroReversiHex::validarJugada(int c, int p, TableroReversiHex::Ficha color) const
-{
-	return true;
+{	
+
+	if (verFlanqueaDir(0, c, p, color) || verFlanqueaDir(1, c, p, color) || verFlanqueaDir(2, c, p, color) || verFlanqueaDir(3, c, p, color) || verFlanqueaDir(4, c, p, color) || verFlanqueaDir(5, c, p, color)) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 bool TableroReversiHex::verFin() const
 {
-	return false;
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N; j++) {
+			if (columnas[j][i].cf == nula) {
+				return false;
+			}
+
+			if (i == N - 1 && j % 2 == 0) {
+				i++;
+			}
+		}
+	}
+
+	return true;
 }
 
 bool TableroReversiHex::verPasan(Ficha color) const
@@ -200,8 +218,14 @@ void TableroReversiHex::colocarSimple(int c, int p, Ficha color)
 	columnas[c][p] = cld; // OJO: las celdas ya existen por eso es posible la asignación
 }
 
-void TableroReversiHex::colocarFlanqueando(int f, int c, Ficha color)
+void TableroReversiHex::colocarFlanqueando(int c, int p, Ficha color)
 {
+	flanqueaDir(0, c, p, color);
+	flanqueaDir(1, c, p, color);
+	flanqueaDir(2, c, p, color);
+	flanqueaDir(3, c, p, color);
+	flanqueaDir(4, c, p, color);
+	flanqueaDir(5, c, p, color);
 
 }
 
@@ -478,6 +502,7 @@ bool TableroReversiHex::verFlanqueaDir(int dir, int c, int p, Ficha color) const
 	}
 }
 
+
 void TableroReversiHex::flanqueaDir(int dir, int c, int p, TableroReversiHex::Ficha color)
 {
 	assert((0 <= c) && (c < N + 1));
@@ -486,6 +511,8 @@ void TableroReversiHex::flanqueaDir(int dir, int c, int p, TableroReversiHex::Fi
 	assert(verFlanqueaDir(dir, c, p, color));
 
 	Ficha otro_color;
+	int cc = 0;
+	int pp = 0;
 
 	// determina cuál es el otro color
 	if (color == negra)
@@ -497,18 +524,20 @@ void TableroReversiHex::flanqueaDir(int dir, int c, int p, TableroReversiHex::Fi
 	switch (dir) {
 		case 0: // diagonal ascendente_Der
 
-			int pp = 0;
+			pp = 0;
 
 			if (c % 2 == 0) {
 				pp = p - 1;
+				cc = c + 1;
 			}
 			else {
 				pp = p;
+				cc = c + 1;
 			}
 
 
-			int cc = c + 1;
-			while ((pp > 0) && (cc < N) && (columnas[cc][pp].cf == otro_color))
+			
+			while ((pp >= 0) && (cc < N-1) && (columnas[cc][pp].cf == otro_color))
 			{
 				columnas[cc][pp].cf = color;
 				if (cc % 2 == 0) {
@@ -521,33 +550,48 @@ void TableroReversiHex::flanqueaDir(int dir, int c, int p, TableroReversiHex::Fi
 
 			break;
 		case 1: // derecha
-			int cc = c + 2;
-			while ((cc < N) && columnas[cc+2][p].cf == otro_color) {
+			cc = c + 2;
+			while ((cc < N) && columnas[cc][p].cf == otro_color) {
 				columnas[cc][p].cf = color;
-				cc = cc + 2;
+				cc = cc + 1;
 			}
 			break;
 		
 		
 		case 2: // diagonal descendente_Der
 
-			int cc = c+1;
-			int pp = p+1;
-			while ((pp < N) && (cc < N) && (columnas[cc][pp].cf == otro_color))
+			if (c % 2 == 0) {
+				pp = p;
+				cc = c + 1;
+			}
+			else {
+				cc = c + 1;
+			}
+
+
+			while ((pp < N-1) && (cc < N-1) && (columnas[cc][pp].cf == otro_color))
 			{
 				columnas[cc][pp].cf = color;
 				if (cc % 2 != 0) {
 					pp++;
 				}
-				cc = cc + 2;
+				cc++;
 			}
 			break;
 		
 		case 3: // diagonal descendente_Izq
 
-			int cc = c - 1;
-			int pp = p + 1;
-			while ((pp < N) && (cc > 0) && (columnas[cc][pp].cf == otro_color))
+
+			if (c % 2 == 0) {
+				pp = p;
+				cc = c - 1;
+			}
+			else {
+				cc = c - 1;
+			}
+
+
+			while ((pp < N) && (cc >= 0) && (columnas[cc][pp].cf == otro_color))
 			{
 				columnas[cc][pp].cf = color;
 				if (cc % 2 != 0) {
@@ -559,37 +603,36 @@ void TableroReversiHex::flanqueaDir(int dir, int c, int p, TableroReversiHex::Fi
 			break;
 		
 		case 4:// izquierda
-			int cc = c - 2;
-			while ((cc >= 0) && columnas[cc-2][p].cf == otro_color) {
+			cc = c - 2;
+			while ((cc > 0) && columnas[cc][p].cf == otro_color) {
 				columnas[cc][p].cf = color;
 				cc = cc - 2;
 			}
 			break;
 
-		case 5: //diagonal ascendente_Izq
 
-			int pp = 0;
+		case 5: //diagonal ascendente_Izq
+			
+			pp = 0;
 
 			if (c % 2 == 0) {
 				pp = p - 1;
+				cc = c - 1;
 			}
 			else {
 				pp = p;
+				cc = c - 1;
 			}
-
-
-			int cc = c - 1;
-			while ((pp > 0) && (cc > 0) && (columnas[cc][pp].cf == otro_color))
+			
+			while ((pp >= 0) && (cc >= 0) && (columnas[cc][pp].cf == otro_color))
 			{
 				columnas[cc][pp].cf = color;
 				if (cc % 2 == 0) {
 					pp--;
 				}
-				cc = cc - 2;
+				cc = cc - 1;
 			}
 			break;
-	
-	
 	}
 }
 

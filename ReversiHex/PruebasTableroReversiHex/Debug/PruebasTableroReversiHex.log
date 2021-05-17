@@ -1,3 +1,4 @@
 ﻿  test.cpp
-C:\Users\Zuri\source\repos\ReversiHex\ReversiHex\TableroReversiHex.h(479): warning C4715: 'TableroReversiHex::verFlanqueaDir': no todas las rutas de acceso de control devuelven un valor
+C:\Users\Zuri\source\repos\ReversiHex\PruebasTableroReversiHex\test.cpp(74,5): warning C4102: 'std': etiqueta sin referencia
+C:\Users\Zuri\source\repos\ReversiHex\ReversiHex\TableroReversiHex.h(503): warning C4715: 'TableroReversiHex::verFlanqueaDir': no todas las rutas de acceso de control devuelven un valor
   PruebasTableroReversiHex.vcxproj -> C:\Users\Zuri\source\repos\ReversiHex\Debug\PruebasTableroReversiHex.exe

@@ -18,5 +18,43 @@
     <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_derAscInterna" Duration="1" />
     <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_izqDesc_Esquina" Duration="1" />
     <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_izqAsc_Esquina" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.InicializacionCorrecta_T_5" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.InicializacionCorrecta_T_7" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_izq_1" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_izq_2" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_der_Interna" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_der_Borde" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_derAsc_Borde" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_derAsc_Interna" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_izqDesc_Interna" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_izqAsc_Interna" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_izq_Interna" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testFlanqueaDir_izq_Borde" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testVerFlanqueaDir_izq_Interna" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testVerFlanqueaDir_izq_Borde" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testVerFlanqueaDir_der_Interna" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testVerFlanqueaDir_der_Borde" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testVerFlanqueaDir_derDesc_Esquina" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testVerFlanqueaDir_derDesc_Interna" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testVerFlanqueaDir_derAsc_Borde" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testVerFlanqueaDir_derAsc_Interna" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testVerFlanqueaDir_izqDesc_Esquina" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testVerFlanqueaDir_izqDesc_Interna" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testVerFlanqueaDir_izqAsc_Esquina" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testVerFlanqueaDir_izqAsc_Interna" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.Prueba_adysToString" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testValidarJugada" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testValidarJugada_1" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testValidarJugada_2" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testValidarJugada_3" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testValidarJugada_4" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testValidarJugada_5" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testValidarJugada_6" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testValidarJugada_7" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testValidarJugada_8" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testValidarJugada_9" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testValidarJugada_10" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testValidarJugada_11" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testValidarJugada_12" Duration="1" />
   </TestDurations>
 </GtaTestDurations>
