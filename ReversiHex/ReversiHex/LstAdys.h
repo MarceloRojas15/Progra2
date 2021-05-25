@@ -1,7 +1,10 @@
 #pragma once
 
-#include <memory>	// para usar los punteros inteligentes de tipo shared_ptr
 #include <sstream>  // permite usar ostringstream en "toString()".
+#include <list>
+#include <vector>
+#include <algorithm>
+using namespace std;
 
 class LstAdys
 {
@@ -14,6 +17,7 @@ public:
 		int p;
 		DatosAdy() : dir(0), c(0), p(0) {};
 		DatosAdy(int d, int c, int p) : dir(d), c(c), p(p) {};
+		bool operator==(const DatosAdy& ady) const { return dir == ady.dir; };
 	};
 
 	// EFE: construye una lista de adyacencias vacia. El destructor no es necesario porque se usan shared_ptr
@@ -34,37 +38,28 @@ public:
 	void agrAdyacencia(DatosAdy& dady);
 
 private:
-	struct Celda {
-		int dir; // representa una dirección de adyacencia entre 0 a 5
-		int c;	 // columna de la adyacente
-		int p;	 // posicion de la adyacente
-		std::shared_ptr< Celda > prx;	// puntero inteligente a la próxima celda
-		Celda() : dir(0), c(0), p(0), prx(0) {};
-		Celda(int d, int c, int p) : dir(d), c(c), p(p) {};
-	};
 
-	std::shared_ptr< Celda > inicio;
-	std::shared_ptr< Celda > fin; // para agregar al final
+	list< DatosAdy > lista;
 };
 
 LstAdys::LstAdys()
 {
-	inicio = 0;
-	fin = 0;
 }
 
 void LstAdys::obtDatosAdy(DatosAdy& dady) const
 {
-	std::shared_ptr< Celda > cursor = inicio;
-	int rsl = 0; // suponemos que la insercion es valida, si no, cambia a -1
-	while ((cursor != 0) && (cursor->dir != dady.dir)) {
-		 cursor = cursor->prx;
-	}
-	if (cursor == 0)
-		dady.dir = -1; // no se pudo encontrar una adyacencia con la direccion en dady.dir
-	else if (cursor->dir == dady.dir) {
-		dady.c = cursor->c;
-		dady.p = cursor->p;
+	bool encontrado = 0;
+
+	for (auto iter : lista) {
+		if (iter.dir == dady.dir) {
+			dady.c = iter.c;
+			dady.p = iter.p;
+			encontrado = 1;
+		}
+		if (encontrado) {
+			dady.dir = -1;
+			break;
+		}
 	}
 }
 
@@ -72,13 +67,11 @@ string LstAdys::toString() const
 {
 	ostringstream salida;
 	salida << "{ ";
-	std::shared_ptr< Celda > cursor = inicio;
-	while (cursor != 0) {
-		salida << cursor->dir << " ";
-		salida << "[ " << cursor->c << "," << cursor->p << " ]";
-		if (cursor->prx != 0)
-			salida << ",";
-		cursor = cursor->prx;
+
+	for (auto iter1 : lista) {
+		salida << iter1.dir << " ";
+		salida << "[ " << iter1.c << "," << iter1.p << " ]";
+		salida << ",";
 	}
 	salida << " }" << endl;
 	return salida.str();
@@ -86,24 +79,17 @@ string LstAdys::toString() const
 
 void LstAdys::agrAdyacencia(DatosAdy& dady)
 {
-	std::shared_ptr< Celda > cursor = inicio;
-	int rsl = 0; // suponemos que la insercion es valida, si no, cambia a -1
-	while ((cursor != 0) && (rsl != -1)) {
-		if (cursor->dir == dady.dir) {		// OJO: ya existe una adyacencia con la direccion dady.dir
-			rsl = -1;
+
+	int debeAgregar = 0; // suponemos que la insercion es valida, si no, cambia a -1
+	
+	for (auto iter2 : lista) {
+		if (iter2.dir == dady.dir) {
+			debeAgregar = -1;
 			dady.dir = -1;
 		}
-		cursor = cursor->prx;
 	}
-	if (rsl != -1) {
-		std::shared_ptr< Celda > nueva_celda_p = std::shared_ptr< Celda >(new Celda(dady.dir, dady.c, dady.p));
-		if (inicio == 0) {
-			inicio = nueva_celda_p;
-			fin = nueva_celda_p;
-		}
-		else {
-			fin->prx = nueva_celda_p;
-			fin = nueva_celda_p;
-		}
+
+	if (debeAgregar != -1) {
+		lista.push_back(dady);
 	}
 }
