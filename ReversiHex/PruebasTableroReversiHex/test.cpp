@@ -96,64 +96,8 @@ TEST_F(PruebasTableroReversiHex, ColocarYLuegoObservarFicha) {
 // Estas pruebas son acorde a lo solicitado en el punto 10 del enunciado.
 
 
-//Pruebas de flanqueo en la dirección: Izquierda.
-
-//Caso 1: fichas colocadas en la parte interna o "central" del tablero.
-TEST_F(PruebasTableroReversiHex, testVerFlanqueaDir_izq_Interna) {
-	t_7.colocarSimple(2, 2, TableroReversiHex::Ficha::blanca);
-	t_7.colocarSimple(4, 2, TableroReversiHex::Ficha::negra);
-
-	EXPECT_EQ(t_7.verFlanqueaDir(4, 6, 2, TableroReversiHex::Ficha::blanca), true);
-}
-
-//Caso 2: fichas colocadas en el borde del tablero.
-TEST_F(PruebasTableroReversiHex, testVerFlanqueaDir_izq_Borde) {
-
-	t_5.colocarSimple(0, 2, TableroReversiHex::Ficha::blanca);
-	t_5.colocarSimple(2, 2, TableroReversiHex::Ficha::negra);
-
-	ASSERT_TRUE(t_5.verFlanqueaDir(4, 4, 2, TableroReversiHex::Ficha::blanca));
-}
 
 
-//Pruebas de flanqueo en la dirección: derecha.
- 
-//Caso 1: fichas colocadas en la parte interna o "central" del tablero.
-TEST_F(PruebasTableroReversiHex, testVerFlanqueaDir_der_Interna) {
-
-	t_7.colocarSimple(4, 2, TableroReversiHex::Ficha::negra);
-	t_7.colocarSimple(6, 2, TableroReversiHex::Ficha::blanca);
-
-	EXPECT_EQ(t_7.verFlanqueaDir(1, 2, 2, TableroReversiHex::Ficha::blanca), true);
-}
-
-//Caso 2: fichas colocadas en el borde del tablero.
-TEST_F(PruebasTableroReversiHex, testVerFlanqueaDir_der_Borde) {
-
-	t_7.colocarSimple(2, 0, TableroReversiHex::Ficha::negra);
-	t_7.colocarSimple(4, 0, TableroReversiHex::Ficha::blanca);
-
-	EXPECT_EQ(t_7.verFlanqueaDir(1, 0, 0, TableroReversiHex::Ficha::blanca), true);
-}
-
-
-
-//Pruebas de Verflanqueo en la dirección: derecha - Descendente.
-
-//Caso 1: fichas colocadas en la esquina.
-TEST_F(PruebasTableroReversiHex, testVerFlanqueaDir_derDesc_Esquina) {
-
-	t_7.colocarSimple(5, 5, TableroReversiHex::Ficha::negra);
-	t_7.colocarSimple(6, 6, TableroReversiHex::Ficha::blanca);
-
-	EXPECT_EQ(t_7.verFlanqueaDir(2, 4, 5, TableroReversiHex::Ficha::blanca), true);
-}
-
-//Caso 2: con fichas localizadas en la zona interna del tablero.
-TEST_F(PruebasTableroReversiHex, testVerFlanqueaDir_derDesc_Interna){
-
-	EXPECT_EQ(t_7.verFlanqueaDir(2, 2, 2, TableroReversiHex::Ficha::blanca), true);
-}
 
 
 
@@ -178,17 +122,80 @@ TEST_F(PruebasTableroReversiHex, testVerFlanqueaDir_derAsc_Interna) {
 }
 
 
+//Pruebas de flanqueo en la dirección: derecha.
+ 
+//Caso 1: fichas colocadas en la parte interna o "central" del tablero.
+TEST_F(PruebasTableroReversiHex, testVerFlanqueaDir_der_Interna) {
+
+	t_7.colocarSimple(4, 2, TableroReversiHex::Ficha::negra);
+	t_7.colocarSimple(6, 2, TableroReversiHex::Ficha::blanca);
+
+	EXPECT_EQ(t_7.verFlanqueaDir(1, 2, 2, TableroReversiHex::Ficha::blanca), true);
+}
+
+//Caso 2: fichas colocadas en el borde del tablero.
+TEST_F(PruebasTableroReversiHex, testVerFlanqueaDir_der_Borde) {
+
+	t_7.colocarSimple(2, 0, TableroReversiHex::Ficha::negra);
+	t_7.colocarSimple(4, 0, TableroReversiHex::Ficha::blanca);
+
+	EXPECT_EQ(t_7.verFlanqueaDir(1, 0, 0, TableroReversiHex::Ficha::blanca), true);
+}
+
+
+//Pruebas de Verflanqueo en la dirección: derecha - Descendente.
+
+//Caso 1: fichas colocadas en la esquina.
+TEST_F(PruebasTableroReversiHex, testVerFlanqueaDir_derDesc_Esquina) {
+
+	t_7.colocarSimple(5, 5, TableroReversiHex::Ficha::negra);
+	t_7.colocarSimple(6, 6, TableroReversiHex::Ficha::blanca);
+
+	EXPECT_EQ(t_7.verFlanqueaDir(2, 4, 5, TableroReversiHex::Ficha::blanca), true);
+}
+
+//Caso 2: con fichas localizadas en la zona interna del tablero.
+TEST_F(PruebasTableroReversiHex, testVerFlanqueaDir_derDesc_Interna){
+
+	EXPECT_EQ(t_7.verFlanqueaDir(2, 2, 2, TableroReversiHex::Ficha::blanca), true);
+}
+
+
 
 // Pruebas de Verflanqueo en la dirección: izquierda - Descendente.
 
-// Caso 1: Con las Fichas ubicadas en una esquina del tablero.
+// Caso 1: Caso donde no es posible un flanqueo
 TEST_F(PruebasTableroReversiHex, testVerFlanqueaDir_izqDesc_Esquina) {
 
 	t_7.colocarSimple(0, 6, TableroReversiHex::Ficha::blanca);
 	t_7.colocarSimple(1, 5, TableroReversiHex::Ficha::negra);
 
-	ASSERT_TRUE(t_7.verFlanqueaDir(5, 2, 5, TableroReversiHex::Ficha::blanca));
+	ASSERT_FALSE(t_7.verFlanqueaDir(3, 2, 5, TableroReversiHex::Ficha::blanca));
 }
+
+////////////////////////////Caso2
+
+
+//Pruebas de flanqueo en la dirección: Izquierda.
+
+//Caso 1: fichas colocadas en la parte interna o "central" del tablero.
+TEST_F(PruebasTableroReversiHex, testVerFlanqueaDir_izq_Interna) {
+	t_7.colocarSimple(2, 2, TableroReversiHex::Ficha::blanca);
+	t_7.colocarSimple(4, 2, TableroReversiHex::Ficha::negra);
+
+	EXPECT_EQ(t_7.verFlanqueaDir(4, 6, 2, TableroReversiHex::Ficha::blanca), true);
+}
+//Caso 2: fichas colocadas en el borde del tablero.
+TEST_F(PruebasTableroReversiHex, testVerFlanqueaDir_izq_Borde) {
+
+	t_5.colocarSimple(0, 2, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(2, 2, TableroReversiHex::Ficha::negra);
+
+	ASSERT_TRUE(t_5.verFlanqueaDir(4, 4, 2, TableroReversiHex::Ficha::blanca));
+}
+
+
+//////////////////Caso 1:
 
 // Caso 2: Con las Fichas ubicadas en la parte interna o central del tablero.
 TEST_F(PruebasTableroReversiHex, testVerFlanqueaDir_izqDesc_Interna) {
@@ -198,28 +205,6 @@ TEST_F(PruebasTableroReversiHex, testVerFlanqueaDir_izqDesc_Interna) {
 
 	ASSERT_TRUE(t_7.verFlanqueaDir(5, 4, 4, TableroReversiHex::Ficha::blanca));
 }
-
-
-
-// Pruebas de Verflanqueo en la dirección: izquierda - Ascendente.
-
-// Caso 1: con flanqueo en una esquina.
-TEST_F(PruebasTableroReversiHex, testVerFlanqueaDir_izqAsc_Esquina) {
-
-	t_7.colocarSimple(0, 5, TableroReversiHex::Ficha::blanca);
-	t_7.colocarSimple(4, 4, TableroReversiHex::Ficha::negra);
-
-	ASSERT_TRUE(t_7.verFlanqueaDir(6, 4, 4, TableroReversiHex::Ficha::blanca));
-}
-
-// Caso 2: con flanqueo en la parte interna del tablero.
-
-TEST_F(PruebasTableroReversiHex, testVerFlanqueaDir_izqAsc_Interna) {
-
-	ASSERT_TRUE(t_7.verFlanqueaDir(6, 2, 2, TableroReversiHex::Ficha::blanca));
-}
-
-
 
 
 
@@ -369,7 +354,7 @@ TEST_F(PruebasTableroReversiHex, testFlanqueaDir_izqAsc_Interna) {
 // Pruebas al método ValidarJugada //
 //*********************************//
 
-//Caso con flanqueo en dos direcciones
+//Caso con flanqueo en dos direcciones (dos flanqueos diagonales incluyendo fichas en esquina)
 TEST_F(PruebasTableroReversiHex, testValidarJugada_1) {
 
 	t_7.colocarSimple(0, 0, TableroReversiHex::Ficha::blanca);
@@ -380,21 +365,22 @@ TEST_F(PruebasTableroReversiHex, testValidarJugada_1) {
 	ASSERT_TRUE(t_7.validarJugada(2, 1, TableroReversiHex::Ficha::blanca));
 }
 
-//Caso con flanqueo en una dirección
+//Caso con flanqueo en una dirección (incluyendo fichas en esquina)
 TEST_F(PruebasTableroReversiHex, testValidarJugada_2) {
 
 	t_7.colocarSimple(0, 0, TableroReversiHex::Ficha::blanca);
 	t_7.colocarSimple(1, 0, TableroReversiHex::Ficha::negra);
-	t_7.colocarSimple(3, 0, TableroReversiHex::Ficha::blanca);
-	t_7.colocarSimple(4, 0, TableroReversiHex::Ficha::blanca);
 
 	ASSERT_TRUE(t_7.validarJugada(2, 1, TableroReversiHex::Ficha::blanca));
 }
+
+
+//Caso con flanqueo diagonal, una sola dirección (incluyendo fichas en el borde)
 TEST_F(PruebasTableroReversiHex, testValidarJugada_3) {
 
-	t_7.colocarSimple(3, 3, TableroReversiHex::Ficha::negra);
-	t_7.colocarSimple(4, 2, TableroReversiHex::Ficha::blanca);
-	ASSERT_TRUE(t_7.validarJugada(1, 4, TableroReversiHex::Ficha::negra));
+	t_7.colocarSimple(3, 4, TableroReversiHex::Ficha::negra);
+	t_7.colocarSimple(2, 5, TableroReversiHex::Ficha::blanca);
+	ASSERT_TRUE(t_7.validarJugada(1, 5, TableroReversiHex::Ficha::negra));
 }
 
 TEST_F(PruebasTableroReversiHex, testValidarJugada_4) {
@@ -433,12 +419,12 @@ TEST_F(PruebasTableroReversiHex, testValidarJugada_8) {
 
 
 TEST_F(PruebasTableroReversiHex, testValidarJugada_9) {
-	t_7.colocarSimple(0, 0, TableroReversiHex::Ficha::blanca);
+	t_7.colocarSimple(2, 1, TableroReversiHex::Ficha::blanca);
 	t_7.colocarSimple(1, 0, TableroReversiHex::Ficha::negra);
 	
 	t_7.colocarSimple(4, 0, TableroReversiHex::Ficha::blanca);
 	t_7.colocarSimple(3, 0, TableroReversiHex::Ficha::blanca);
-	ASSERT_TRUE(t_7.validarJugada(2, 1, TableroReversiHex::Ficha::blanca));
+	ASSERT_TRUE(t_7.validarJugada(0, 0, TableroReversiHex::Ficha::blanca));
 }
 
 TEST_F(PruebasTableroReversiHex, testValidarJugada_10) {
@@ -458,4 +444,117 @@ TEST_F(PruebasTableroReversiHex, testValidarJugada_12) {
 	t_7.colocarSimple(3, 4, TableroReversiHex::Ficha::blanca);
 	t_7.colocarSimple(4, 5, TableroReversiHex::Ficha::negra);
 	ASSERT_TRUE(t_7.validarJugada(2, 4, TableroReversiHex::Ficha::blanca));
+}
+
+
+
+//***************************************//
+//			Pruebas VerFin()			 //
+//***************************************//
+
+//Caso con tablero lleno, verFin == True
+TEST_F(PruebasTableroReversiHex, testVerFin) {
+	t_5.colocarSimple(0, 0, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(1, 0, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(2, 0, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(3, 0, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(4, 0, TableroReversiHex::Ficha::blanca);
+
+	t_5.colocarSimple(0, 1, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(1, 1, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(2, 1, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(3, 1, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(4, 1, TableroReversiHex::Ficha::blanca);
+
+	t_5.colocarSimple(0, 2, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(1, 2, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(2, 2, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(3, 2, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(4, 2, TableroReversiHex::Ficha::blanca);
+
+	t_5.colocarSimple(0, 3, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(1, 3, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(2, 3, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(3, 3, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(4, 3, TableroReversiHex::Ficha::blanca);
+
+	t_5.colocarSimple(0, 4, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(2, 4, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(4, 4, TableroReversiHex::Ficha::blanca);
+
+	ASSERT_TRUE(t_5.verFin());
+}
+
+
+//Caso en que el tablero no está lleno.
+TEST_F(PruebasTableroReversiHex, testVerFin_2) {
+	t_7.colocarSimple(3, 4, TableroReversiHex::Ficha::blanca);
+	ASSERT_FALSE(t_7.verFin());
+}
+
+
+TEST_F(PruebasTableroReversiHex, testVerPasan) {
+	t_5.colocarSimple(0, 0, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(1, 0, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(2, 0, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(3, 0, TableroReversiHex::Ficha::negra);
+	t_5.colocarSimple(4, 0, TableroReversiHex::Ficha::blanca);
+
+	t_5.colocarSimple(0, 1, TableroReversiHex::Ficha::blanca);
+	//t_5.colocarSimple(1, 1, TableroReversiHex::Ficha::negra); //Este es el espacio donde se puede jugar,
+	t_5.colocarSimple(2, 1, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(3, 1, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(4, 1, TableroReversiHex::Ficha::blanca);
+
+	t_5.colocarSimple(0, 2, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(1, 2, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(2, 2, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(3, 2, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(4, 2, TableroReversiHex::Ficha::blanca);
+
+	t_5.colocarSimple(0, 3, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(1, 3, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(2, 3, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(3, 3, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(4, 3, TableroReversiHex::Ficha::blanca);
+
+	t_5.colocarSimple(0, 4, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(2, 4, TableroReversiHex::Ficha::blanca);
+	t_5.colocarSimple(4, 4, TableroReversiHex::Ficha::blanca);
+	
+
+	EXPECT_FALSE(t_5.verPasan(TableroReversiHex::Ficha::negra));
+}
+
+TEST_F(PruebasTableroReversiHex, testPruebaDefinitiva) {
+	t_5.colocarFlanqueando(0, 0, TableroReversiHex::Ficha::blanca);
+	t_5.colocarFlanqueando(1, 0, TableroReversiHex::Ficha::blanca);
+	t_5.colocarFlanqueando(2, 0, TableroReversiHex::Ficha::blanca);
+	t_5.colocarFlanqueando(3, 0, TableroReversiHex::Ficha::negra);
+	t_5.colocarFlanqueando(4, 0, TableroReversiHex::Ficha::blanca);
+
+	t_5.colocarFlanqueando(0, 1, TableroReversiHex::Ficha::blanca);
+	t_5.colocarFlanqueando(1, 1, TableroReversiHex::Ficha::negra); //Este es el espacio donde se puede jugar,
+	t_5.colocarFlanqueando(2, 1, TableroReversiHex::Ficha::blanca);
+	t_5.colocarFlanqueando(3, 1, TableroReversiHex::Ficha::blanca);
+	t_5.colocarFlanqueando(4, 1, TableroReversiHex::Ficha::blanca);
+
+	t_5.colocarFlanqueando(0, 2, TableroReversiHex::Ficha::blanca);
+	t_5.colocarFlanqueando(1, 2, TableroReversiHex::Ficha::blanca);
+	t_5.colocarFlanqueando(2, 2, TableroReversiHex::Ficha::blanca);
+	t_5.colocarFlanqueando(3, 2, TableroReversiHex::Ficha::blanca);
+	t_5.colocarFlanqueando(4, 2, TableroReversiHex::Ficha::blanca);
+
+	t_5.colocarFlanqueando(0, 3, TableroReversiHex::Ficha::blanca);
+	t_5.colocarFlanqueando(1, 3, TableroReversiHex::Ficha::blanca);
+	t_5.colocarFlanqueando(2, 3, TableroReversiHex::Ficha::blanca);
+	t_5.colocarFlanqueando(3, 3, TableroReversiHex::Ficha::blanca);
+	t_5.colocarFlanqueando(4, 3, TableroReversiHex::Ficha::blanca);
+
+	t_5.colocarFlanqueando(0, 4, TableroReversiHex::Ficha::blanca);
+	t_5.colocarFlanqueando(2, 4, TableroReversiHex::Ficha::blanca);
+	t_5.colocarFlanqueando(4, 4, TableroReversiHex::Ficha::blanca);
+
+
+	EXPECT_FALSE(t_5.verPasan(TableroReversiHex::Ficha::negra));
 }

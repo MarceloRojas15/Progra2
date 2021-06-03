@@ -103,6 +103,12 @@ public:
 
 /* CODIGO DE LOS METODOS */
 
+
+/* Métodos modificadores de flanqueo privados, se invocarán desde "colocar()" */
+
+	// REQ: El valor N tiene que ser un número impar mayor que 4.
+	// MOD: Valor de N, tamaño y contenido de Columnas.
+	// EFE: Se crea un tablero de tamaño N y se agregan fichas en el centro del tablero.
 TableroReversiHex::TableroReversiHex(int N) : columnas(N) // reserva espacio para N columnas.
 {
 	this->N = N;
@@ -121,8 +127,7 @@ TableroReversiHex::TableroReversiHex(int N) : columnas(N) // reserva espacio par
 			 generarLstAdys(c, p, columnas[c][p].lista_adys);
 	}
 
-	// COMPLETE
-
+	//Se ponen fichas en el centro del tablero. Si son tableros de tamaño 5, 9, 13, etc se crea un patrón distintivo para iniciar las partidas
 	if ((N - 5) % 4 == 0) {
 
 		int indicador = (N - 5) / 4;
@@ -134,6 +139,7 @@ TableroReversiHex::TableroReversiHex(int N) : columnas(N) // reserva espacio par
 		colocarSimple(2 * indicador + 3, (2 * indicador) + 2, negra);
 	}
 
+	//Se ponen fichas en el centro del tablero. Si son tableros de tamaño 7, 11, 15, etc se crea un patrón distintivo para iniciar las partidas
 	if ((N - 7) % 4 == 0) {
 
 		int indicador = (N - 7) / 4;
@@ -146,12 +152,20 @@ TableroReversiHex::TableroReversiHex(int N) : columnas(N) // reserva espacio par
 
 }
 
+
+/* Destructor de la clase TableroReversiHex */
 TableroReversiHex::~TableroReversiHex()
 {
 	// No es necesario liberar memoria porque la memoria asignada al 
 	// monticulo por <vector> y <list> queda oculta tras un objeto en la pila.
 }
 
+
+/* Se verifica si al intentar posicionar una ficha en esta celda, se puede flanquear fichas del enemigo */
+
+	// REQ: El llamado al método verFlanqueaDir en distintas direcciones, tiene que devolver True al menos una vez.
+	// MOD: No se modifica nada
+	// EFE: Devuelve True si se puede flanquear al menos una vez en la Columna y Posición brindada
 bool TableroReversiHex::validarJugada(int c, int p, TableroReversiHex::Ficha color) const
 {
 	if (verFlanqueaDir(0, c, p, color) || verFlanqueaDir(1, c, p, color) || verFlanqueaDir(2, c, p, color) || verFlanqueaDir(3, c, p, color) || verFlanqueaDir(4, c, p, color) || verFlanqueaDir(5, c, p, color)) {
@@ -162,6 +176,12 @@ bool TableroReversiHex::validarJugada(int c, int p, TableroReversiHex::Ficha col
 	}
 }
 
+
+/* Método observador que verifica si el tablero está lleno y no es posible posicionar más fichas */
+
+	// REQ: El tablero debe estar lleno.
+	// MOD: No se modifican variables o el estado del tablero.
+	// EFE: Se devuelve True en caso de que el tablero esté lleno.
 bool TableroReversiHex::verFin() const
 {
 	for (int i = 0; i < N; i++) {
@@ -171,20 +191,50 @@ bool TableroReversiHex::verFin() const
 			}
 
 			if (i == N - 1 && j % 2 == 0) {//en la imagen de cómo debe verse el tablero, el tablero tiene N-1 filas por lo que, no se verifica esa ultima fila.
-				i++;
+				j++;
+			}
+		}
+	}
+	return true;
+}
+
+
+/* Método observador que verifica si el jugador en turno puede realizar un flanqueo en el estado actual del tablero*/
+
+	// REQ: Se requiere al menos una celda nula en la que sea posible flanquear con fichas del color en turno.
+	// MOD: No se modifica el estado de variables o el estado del Tablero.
+	// EFE: Se devuelve False en caso de que sea posible realizar una jugada con flanqueo (osea que no es necesario pasar de turno).
+
+bool TableroReversiHex::verPasan(Ficha color) const
+{
+	//llamar a VerFlanqueo con el color en cada una de las casillas nulas.
+	bool posibleJugada = false;
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N; j++) {
+			if (columnas[j][i].cf == nula) {
+				if(validarJugada(j, i, color)){
+					return false;
+				}
+			}
+
+			if (i == N - 1 && j % 2 == 0) {//en la imagen de cómo debe verse el tablero, el tablero tiene N-1 filas por lo que, no se verifica esa ultima fila.
+				if (validarJugada(j, i, color)) {
+					return false;
+				}
+				j++;
 			}
 		}
 	}
 
-	return true;
-
-}
-
-bool TableroReversiHex::verPasan(Ficha color) const
-{
-	// COMPLETE
 	return false;
 }
+
+
+/* Método observador que verifica el color de la ficha ubicada en una celda del tablero*/
+
+	// REQ: Columna y posición de la celda a verificar.
+	// MOD: No se modifica el estado del tablero ni de variables.
+	// EFE: Se devuelve el color de la ficha ubicada en la celda.
 
 TableroReversiHex::Ficha TableroReversiHex::verFichaEn(int c, int p) const
 {
@@ -194,6 +244,12 @@ TableroReversiHex::Ficha TableroReversiHex::verFichaEn(int c, int p) const
 	return columnas[c][p].cf;
 }
 
+
+/* Método que devuelve un string con las adyacencias de cada celda del tablero*/
+
+	// REQ: No se requieren parámetros
+	// MOD: Se crea un ostringstream para devolver un string con las adyacencias de cada celda del tablero
+	// EFE: Se devuelve un string con las adyacencias de cada celda del tablero
 string TableroReversiHex::adysToString() const
 {
 	ostringstream salida;
@@ -209,25 +265,59 @@ string TableroReversiHex::adysToString() const
 	return salida.str();
 }
 
+
+/* Método observador que verifica si el jugador en turno puede realizar un flanqueo en el estado actual del tablero*/
+
+	// REQ: Se requiere al menos una celda nula en la que sea posible flanquear con fichas del color en turno.
+	// MOD: No se modifica el estado de variables o el estado del Tablero.
+	// EFE: Se devuelve False en caso de que sea posible realizar una jugada con flanqueo (osea que no es necesario pasar de turno)
 void TableroReversiHex::colocarSimple(int c, int p, Ficha color)
 {
 	assert((0 <= c) && (c < N));
 	assert((0 <= p) && ((c % 2 == 0) && (p < N) || (c % 2 == 1) && (p < N - 1)));
-	Celda cld;
-	cld.c = c;
-	cld.p = p;
-	cld.cf = color;
-	columnas[c][p] = cld; // OJO: las celdas ya existen por eso es posible la asignación
-}
+
+	columnas[c][p].c = c;
+	columnas[c][p].p = p;
+	columnas[c][p].cf = color;
+	}
 
 void TableroReversiHex::colocarFlanqueando(int c, int p, Ficha color)
 {
-	flanqueaDir(0, c, p, color);
-	flanqueaDir(1, c, p, color);
-	flanqueaDir(2, c, p, color);
-	flanqueaDir(3, c, p, color);
-	flanqueaDir(4, c, p, color);
-	flanqueaDir(5, c, p, color);
+	
+	if (verFlanqueaDir(0, c, p, color)) {
+		flanqueaDir(0, c, p, color);
+	}
+
+
+	if (c % 2 == 0 && (c < N-4)) {
+		if(verFlanqueaDir(1, c, p, color)){
+			flanqueaDir(1, c, p, color);
+		}
+	}
+	
+	if((p < N - 2 || ( p <= N - 2 && c % 2 == 0)) && c < N-3 ){
+
+		if (verFlanqueaDir(2, c, p, color)) {
+			flanqueaDir(2, c, p, color);
+		}
+	}
+	
+	if (verFlanqueaDir(3, c, p, color)) {
+		flanqueaDir(3, c, p, color);
+	}
+	
+	if (c % 2 == 0 && (c >= 4) || (c % 2 == 1 && c>4)) {
+		if (verFlanqueaDir(4, c, p, color)) {
+			flanqueaDir(4, c, p, color);
+		}
+	}
+
+	if ((p < N - 1 || (p <= N - 1 && c % 2 == 0)) && c >= 2 ) {
+
+		if (verFlanqueaDir(5, c, p, color)) {
+			flanqueaDir(5, c, p, color);
+		}
+	}
 }
 
 string TableroReversiHex::toString() const
@@ -317,7 +407,7 @@ bool TableroReversiHex::verFlanqueaDir(int dir, int c, int p, Ficha color) const
 	case 0: // diagonal ascendente_Der
 
 
-		while (i < N && j >= 0) {
+		while (i < N-1 && j > 0) {
 
 			if (i % 2 == 0) {
 
@@ -341,17 +431,31 @@ bool TableroReversiHex::verFlanqueaDir(int dir, int c, int p, Ficha color) const
 			}
 		}
 
-
-		if (i == N) {
+		if (i == N-1) {
 			if (columnas[i][j].cf == color && encuentra_otro_color) {
 				return true;
 			}
+			else {
+				return false;
+			}
 		}
-		else if (i < N) {
-			if (columnas[i + 1][j].cf == color && encuentra_otro_color) {
+		if (i < N - 1 && j == 0) {
+			if (columnas[i+1][j].cf == color && encuentra_otro_color) {
+
+				return true;
+			}
+			else {
+				return false; 
+			}
+		}
+		
+		if (i < N-1 && j != 0) {
+			if (columnas[i + 1][j-1].cf == color && encuentra_otro_color) {
+
 				return true;
 			}
 		}
+
 		else {
 			return false;
 		}
@@ -360,16 +464,19 @@ bool TableroReversiHex::verFlanqueaDir(int dir, int c, int p, Ficha color) const
 	case 1: // derecha
 
 
-		while (i < N && (columnas[i + 2][p].cf == otro_color)) {
+		while (i < N-3 && (columnas[i + 2][p].cf == otro_color)) {
 			encuentra_otro_color = true;
 			i += 2;
 		}
-		if (i == N) {
+		if (i == N-1) {
 			if (columnas[i][p].cf == color && encuentra_otro_color) {
 				return true;
 			}
+			else {
+				return false;
+			}
 		}
-		if (i < N) {
+		if (i <= N-3) {
 			if (columnas[i + 2][p].cf == color && encuentra_otro_color) {
 				return true;
 			}
@@ -381,9 +488,9 @@ bool TableroReversiHex::verFlanqueaDir(int dir, int c, int p, Ficha color) const
 
 
 
-	case 2: // diagonal descendente_Der
+	case 2:
 
-		while (i < N && j < N && (columnas[i + 1][j].cf == otro_color)) {
+		while (i < N-1 && j < N-1 && (columnas[i + 1][j].cf == otro_color)) {
 			encuentra_otro_color = true;
 			i += 1;
 
@@ -392,13 +499,13 @@ bool TableroReversiHex::verFlanqueaDir(int dir, int c, int p, Ficha color) const
 			}
 		}
 
-		if (i == N) {
+		if (i == N-1) {
 			if (columnas[i][j].cf == color && encuentra_otro_color) {
 				return true;
 			}
 		}
 
-		if (i < N) {
+		if (i < N-1) {
 			if (columnas[i + 1][j].cf == color && encuentra_otro_color) {
 				return true;
 			}
@@ -411,7 +518,56 @@ bool TableroReversiHex::verFlanqueaDir(int dir, int c, int p, Ficha color) const
 	case 3: // diagonal ascendente_Izq
 
 
-		while (i > 0 && j >= 0) {
+		while (i > 0 && j < N-1 && (columnas[i - 1][j].cf == otro_color)) {
+			encuentra_otro_color = true;
+			i--;
+
+			if (i % 2 != 0) {
+				j++;
+			}
+		}
+
+		if (i == 0) {
+			if (columnas[i][j].cf == color && encuentra_otro_color) {
+				return true;
+			}
+		}
+
+		if (i > 0 && j < N-1) {
+			if (columnas[i - 1][j].cf == color && encuentra_otro_color) {
+				return true;
+			}
+		}
+		else {
+			return false;
+		}
+		break;
+
+	case 4: // izquierda
+
+		while (i > 3 && (columnas[i - 2][p].cf == otro_color)) {
+			encuentra_otro_color = true;
+			i -= 2;
+		}
+		if (i == 0) {
+			if (columnas[i][p].cf == color && encuentra_otro_color) {
+				return true;
+			}
+		}
+		if (i > 0) {
+			if (columnas[i - 2][p].cf == color && encuentra_otro_color) {
+				return true;
+			}
+		}
+		else {
+			return false;
+		}
+		break;
+
+
+	case 5: // diagonal descendente_Izq
+		
+		while (i > 0 && j > 0) {
 
 			if (i % 2 == 0) {
 
@@ -436,60 +592,12 @@ bool TableroReversiHex::verFlanqueaDir(int dir, int c, int p, Ficha color) const
 		}
 
 
-		if (i == N) {
+		if (i == N-1) {
 			if (columnas[i][j].cf == color && encuentra_otro_color) {
 				return true;
 			}
 		}
 		else if (i > 0) {
-			if (columnas[i - 1][j].cf == color && encuentra_otro_color) {
-				return true;
-			}
-		}
-		else {
-			return false;
-		}
-		break;
-
-	case 4: // izquierda
-
-		while (i > 0 && (columnas[i - 2][p].cf == otro_color)) {
-			encuentra_otro_color = true;
-			i -= 2;
-		}
-		if (i == 0) {
-			if (columnas[i][p].cf == color && encuentra_otro_color) {
-				return true;
-			}
-		}
-		if (i > 0) {
-			if (columnas[i - 2][p].cf == color && encuentra_otro_color) {
-				return true;
-			}
-		}
-		else {
-			return false;
-		}
-		break;
-
-
-	case 5: // diagonal descendente_Izq
-		while (i > 0 && j < N && (columnas[i - 1][j].cf == otro_color)) {
-			encuentra_otro_color = true;
-			i--;
-
-			if (i % 2 != 0) {
-				j++;
-			}
-		}
-
-		if (i == 0) {
-			if (columnas[i][j].cf == color && encuentra_otro_color) {
-				return true;
-			}
-		}
-
-		if (i > 0) {
 			if (columnas[i - 1][j].cf == color && encuentra_otro_color) {
 				return true;
 			}
@@ -510,7 +618,6 @@ void TableroReversiHex::flanqueaDir(int dir, int c, int p, TableroReversiHex::Fi
 	assert((0 <= c) && (c < N + 1));
 	assert((0 <= p) && ((c % 2 == 0) && (p < N) || (c % 2 == 1) && (p < N - 1)));
 	assert(color != nula);
-	assert(verFlanqueaDir(dir, c, p, color));
 
 	Ficha otro_color;
 	int cc = 0;
@@ -545,7 +652,7 @@ void TableroReversiHex::flanqueaDir(int dir, int c, int p, TableroReversiHex::Fi
 			if (cc % 2 == 0) {
 				pp--;
 			}
-			cc = cc + 2;
+			cc++;
 		}
 
 
@@ -553,9 +660,9 @@ void TableroReversiHex::flanqueaDir(int dir, int c, int p, TableroReversiHex::Fi
 		break;
 	case 1: // derecha
 		cc = c + 2;
-		while ((cc < N) && columnas[cc][p].cf == otro_color) {
+		while ((cc < N-1) && columnas[cc][p].cf == otro_color) {
 			columnas[cc][p].cf = color;
-			cc = cc + 1;
+			cc = cc + 2;
 		}
 		break;
 
@@ -568,6 +675,7 @@ void TableroReversiHex::flanqueaDir(int dir, int c, int p, TableroReversiHex::Fi
 		}
 		else {
 			cc = c + 1;
+			pp = p + 1;
 		}
 
 
@@ -581,7 +689,7 @@ void TableroReversiHex::flanqueaDir(int dir, int c, int p, TableroReversiHex::Fi
 		}
 		break;
 
-	case 3: // diagonal descendente_Izq
+	case 3: // diagonal ascendente_Izq
 
 
 		if (c % 2 == 0) {
@@ -590,16 +698,17 @@ void TableroReversiHex::flanqueaDir(int dir, int c, int p, TableroReversiHex::Fi
 		}
 		else {
 			cc = c - 1;
+			pp = p + 1;
 		}
 
 
-		while ((pp < N) && (cc >= 0) && (columnas[cc][pp].cf == otro_color))
+		while ((pp < N-1) && (cc >= 0) && (columnas[cc][pp].cf == otro_color))
 		{
 			columnas[cc][pp].cf = color;
 			if (cc % 2 != 0) {
 				pp++;
 			}
-			cc = cc - 2;
+			cc--;
 		}
 
 		break;
@@ -613,7 +722,7 @@ void TableroReversiHex::flanqueaDir(int dir, int c, int p, TableroReversiHex::Fi
 		break;
 
 
-	case 5: //diagonal ascendente_Izq
+	case 5: //diagonal descendente_Izq
 
 		pp = 0;
 
@@ -632,7 +741,7 @@ void TableroReversiHex::flanqueaDir(int dir, int c, int p, TableroReversiHex::Fi
 			if (cc % 2 == 0) {
 				pp--;
 			}
-			cc = cc - 1;
+			cc--;
 		}
 		break;
 	}

@@ -56,5 +56,10 @@
     <TestDuration Test="PruebasTableroReversiHex.testValidarJugada_10" Duration="1" />
     <TestDuration Test="PruebasTableroReversiHex.testValidarJugada_11" Duration="1" />
     <TestDuration Test="PruebasTableroReversiHex.testValidarJugada_12" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testVerFin" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testVerFin_2" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testVerFin_3" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testVerPasan" Duration="1" />
+    <TestDuration Test="PruebasTableroReversiHex.testPruebaDefinitiva" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

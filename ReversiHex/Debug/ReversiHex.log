@@ -1,3 +1,0 @@
-﻿  main.cpp
-C:\Users\Zuri\source\repos\ReversiHex\ReversiHex\TableroReversiHex.h(547): warning C4715: 'TableroReversiHex::verFlanqueaDir': no todas las rutas de acceso de control devuelven un valor
-  ReversiHex.vcxproj -> C:\Users\Zuri\source\repos\ReversiHex\Debug\ReversiHex.exe

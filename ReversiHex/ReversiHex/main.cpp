@@ -42,9 +42,11 @@ int main()
 		int f, c = 0;
 		pideJugada(trh, N, nombre_negras, TableroReversiHex::negra, f, c);
 		trh.colocarFlanqueando(f, c, TableroReversiHex::negra);
+		trh.colocarSimple(f, c, TableroReversiHex::negra);
 		cout << trh.toString() << endl << endl;
 		pideJugada(trh, N, nombre_blancas, TableroReversiHex::blanca, f, c);
 		trh.colocarFlanqueando(f, c, TableroReversiHex::blanca);
+		trh.colocarSimple(f, c, TableroReversiHex::blanca);
 		cout << trh.toString() << endl << endl;
 	}
 	return 0;
