@@ -46,6 +46,8 @@ LstAdys::LstAdys()
 {
 }
 
+
+
 void LstAdys::obtDatosAdy(DatosAdy& dady) const
 {
 	bool encontrado = 0;
