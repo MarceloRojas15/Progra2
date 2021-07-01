@@ -1,0 +1,7 @@
+﻿  main.cpp
+C:\Users\Zuri\source\repos\LaboratorioGuiado3\LaboratorioGuiado3\GrafoGnr.h(166,35): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\Zuri\source\repos\LaboratorioGuiado3\LaboratorioGuiado3\GrafoGnr.h(160): message : al compilar la función del miembro clase plantilla "GrafoGnr<int>::GrafoGnr(std::ifstream &)"
+C:\Users\Zuri\source\repos\LaboratorioGuiado3\LaboratorioGuiado3\main.cpp(27): message : Vea la referencia a la creación de una instancia de la función plantilla "GrafoGnr<int>::GrafoGnr(std::ifstream &)" que se está compilando
+C:\Users\Zuri\source\repos\LaboratorioGuiado3\LaboratorioGuiado3\main.cpp(27): message : Vea la referencia a la creación de una instancia de clase plantilla "GrafoGnr<int>" que se está compilando
+C:\Users\Zuri\source\repos\LaboratorioGuiado3\LaboratorioGuiado3\GrafoGnr.h(167,21): warning C4834: se descarta el valor devuelto de la función con el atributo "nodiscard"
+  LaboratorioGuiado3.vcxproj -> C:\Users\Zuri\source\repos\LaboratorioGuiado3\Debug\LaboratorioGuiado3.exe
