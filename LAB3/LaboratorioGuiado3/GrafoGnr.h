@@ -87,7 +87,7 @@ public:
     // REF2: https://en.wikipedia.org/wiki/Connectivity_(graph_theory)
     // SUPUESTO#1: El grafo es conectado, por lo que caminosMinimos.size() == N - 1.
     // SUPUESTO#2: La distancia entre dos vértices directamente conectados es siempre uno.
-    void obtCaminosMinimos(int idVrtO, vector< vector< int >>& caminosMinimos) const;
+    void obtCaminosMinimos(int idVrtO, vector< vector< int >>& caminosMinimos);
 
     // REQ: 0 <= idVrt < N.
     // EFE: Retorna por recorrido la secuencia de idVrt por anchura primero.
@@ -136,13 +136,14 @@ GrafoGnr< T >::GrafoGnr(int N, double p) {
     //Si se agrega por ejemplo adyacencia entre 0 y 2, entonces agregar entre 2 y 0
 
     for (int vertice = 0; vertice < N; vertice++) {
+        //nodos.v = vertice;
 
         for (int i = 0; i < N; i++) {
-            double p_ady = (rand() / (1.2 * RAND_MAX));
+            double p_ady = (rand() / (1.0 * RAND_MAX));
             if (i == vertice) {
                 continue;
             }
-            if (p < p_ady) {
+            if (p_ady < p) {
                 nodos[vertice].listaAdy.push_back(i);
                 nodos[i].listaAdy.push_back(vertice);
             }
@@ -162,34 +163,27 @@ GrafoGnr< T >::GrafoGnr(ifstream& archivo) {
     std::getline(archivo, entrada);
     nodos.resize(stoi(entrada));
     vector <string> tokens;
-    
+
     for (int vertice = 0; vertice < nodos.size(); vertice++) {
+        nodos[vertice].v = vertice;
         tokens.empty();
         entrada = "";
         std::getline(archivo, entrada);
 
-        // stringstream class check1
         stringstream check1(entrada);
         stringstream check2(entrada);
 
         string intermediate;
         string intermediate2;
-            while (getline(check2, intermediate, ',')) {
-                nodos[vertice].listaAdy.push_back(stoi(intermediate));
-            }
-
+        while (getline(check2, intermediate, ',')) {
+            nodos[vertice].listaAdy.push_back(stoi(intermediate));
+        }
     }
- 
-
-    /*while (!archivo.eof()) {
-        getline(archivo, entrada);
-        cout << entrada <<  endl;
-    }*/
 }
 
 template < typename T >
 GrafoGnr< T >::GrafoGnr(const GrafoGnr< T >& orig) {
-
+    nodos = orig.nodos;
 }
 
 template < typename T >
@@ -255,13 +249,39 @@ int GrafoGnr< T >::obtTotVrt() const {
 
 //Metodo del algoritmo de Dijkstra
 template < typename T >
-void GrafoGnr< T >::obtCaminosMinimos(int idVrtO, vector< vector< int >>& caminosMinimos) const {
+void GrafoGnr< T >::obtCaminosMinimos(int idVrtO, vector< vector< int >>& caminosMinimos) {
 
 }
 
+
+
+
 template < typename T >
 void GrafoGnr< T >::obtRecorridoXanchura(int idVrtO, vector< int >& recorrido) const {
+    
+    int N = nodos.size();
+    bool* yaVisitado = new bool[N];
+    
+    for (int i = 0; i < N; i++) {
+        yaVisitado[i] = false;
+    }
 
+    yaVisitado[idVrtO] = true;
+    recorrido.push_back(idVrtO);
+    
+    while (!recorrido.empty()){
+        
+        idVrtO = recorrido.front();
+        cout << idVrtO << " ";
+        recorrido.erase(recorrido.begin());
+
+        for (std::list<int>::const_iterator it = nodos[idVrtO].listaAdy.begin(); it != nodos[idVrtO].listaAdy.end(); ++it) {
+            if (!yaVisitado[*it]){
+                yaVisitado[*it] = true;
+                recorrido.push_back(*it);
+            }
+        }
+    }
 }
 
 

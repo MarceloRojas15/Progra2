@@ -142,7 +142,7 @@
     <ClInclude Include="GrafoGnr.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="grafo_p_z.txt" />
+    <Text Include="grafo_p.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

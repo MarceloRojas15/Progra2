@@ -7,18 +7,14 @@ using namespace std;
 int main()
 {
 	// construcción aleatoria:
-	/*GrafoGnr< int > g_int(10, 0.5);
-	cout << "g_int:" << endl;
-	cout << g_int << endl;
-	std::vector<int> path;
+	GrafoGnr< int > g_int(10, 0.5);
+	std::cout << "g_int:" << endl;
+	std::cout << g_int << endl;
+	
 
-	g_int.obtIdVrtAdys(1, path);
-
-	for (std::vector<int>::const_iterator i = path.begin(); i != path.end(); ++i)
-		std::cout << *i << ' ';*/
-
-		// construcción basada en archivo csv:
-	ifstream d("grafo_p_z.txt", ios::in);
+	
+	// construcción basada en archivo csv:
+	ifstream d("grafo_p.txt", ios::in);
 	if (!d) {
 		cout << "problemas para abrir el archivo grafo_p.txt" << endl;
 		exit(1);
@@ -27,7 +23,7 @@ int main()
 	GrafoGnr< int > g_int1(d);
 	cout << "g_int1:" << endl;
 	cout << g_int1 << endl;
-
+	
 	/*vector< vector< int >> caminosMinimos;
 	g_int1.obtCaminosMinimos(0, caminosMinimos);
 
