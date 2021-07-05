@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GtaTestDurations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Executable>C:\Users\Zuri\source\repos\LaboratorioGuiado3\Debug\GrafoPruebas.exe</Executable>
+  <TestDurations>
+    <TestDuration Test="GrafoPruebas.InicializacionCorrecta" Duration="1" />
+    <TestDuration Test="GrafoPruebas.InicializacionCorrectaN10" Duration="1" />
+    <TestDuration Test="GrafoPruebas.InicializacionCorrectaN20" Duration="1" />
+    <TestDuration Test="GrafoPruebas.porArchivoP" Duration="1" />
+    <TestDuration Test="GrafoPruebas.porArchivoM" Duration="1" />
+    <TestDuration Test="GrafoPruebas.porArchivo" Duration="1" />
+    <TestDuration Test="GrafoPruebas.adyacencias" Duration="1" />
+    <TestDuration Test="GrafoPruebas.adyacenciasB" Duration="1" />
+    <TestDuration Test="GrafoPruebas.caminosMinimosP" Duration="1" />
+    <TestDuration Test="GrafoPruebas.caminosMinimosM" Duration="1" />
+    <TestDuration Test="GrafoPruebas.anchuraP" Duration="1" />
+    <TestDuration Test="GrafoPruebas.anchuraM" Duration="1" />
+    <TestDuration Test="TestCaseName.TestName" Duration="1" />
+  </TestDurations>
+</GtaTestDurations>

@@ -108,7 +108,7 @@ public:
     // NOTA: retorna por referencia para que pueda ser modificado en el contexto invocador.
     T& operator[](int idVrt);
 
-private:
+//private:
 
     template < typename V >
     struct Nodo {
@@ -289,7 +289,7 @@ void GrafoGnr< T >::obtRecorridoXanchura(int idVrtO, vector< int >& recorrido) c
 template < typename T >
 T& GrafoGnr< T >::operator[](int idVrt) {
     T* v_p = new T();		// OJO: fuga de memoria! Too Bad! #Reparado, creo
-    v_p = nodos[idVrt];
+    v_p -> nodos[idVrt];
     return v_p;
 }
 

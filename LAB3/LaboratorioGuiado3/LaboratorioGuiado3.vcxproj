@@ -142,9 +142,6 @@
     <ClInclude Include="GrafoGnr.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="grafo_p.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

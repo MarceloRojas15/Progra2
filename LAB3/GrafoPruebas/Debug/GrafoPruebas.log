@@ -1,0 +1,14 @@
+﻿  test.cpp
+C:\Users\Zuri\source\repos\LaboratorioGuiado3\GrafoPruebas\test.cpp(103,2): warning C4002: hay demasiados argumentos para la invocación de macro "EXPECT_TRUE" de tipo función
+C:\Users\Zuri\source\repos\LaboratorioGuiado3\LaboratorioGuiado3\GrafoGnr.h(167,35): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\Zuri\source\repos\LaboratorioGuiado3\LaboratorioGuiado3\GrafoGnr.h(161): message : al compilar la función del miembro clase plantilla "GrafoGnr<int>::GrafoGnr(std::ifstream &)"
+C:\Users\Zuri\source\repos\LaboratorioGuiado3\GrafoPruebas\test.cpp(32): message : Vea la referencia a la creación de una instancia de la función plantilla "GrafoGnr<int>::GrafoGnr(std::ifstream &)" que se está compilando
+C:\Users\Zuri\source\repos\LaboratorioGuiado3\GrafoPruebas\test.cpp(15): message : Vea la referencia a la creación de una instancia de clase plantilla "GrafoGnr<int>" que se está compilando
+C:\Users\Zuri\source\repos\LaboratorioGuiado3\LaboratorioGuiado3\GrafoGnr.h(169,21): warning C4834: se descarta el valor devuelto de la función con el atributo "nodiscard"
+C:\Users\Zuri\source\repos\LaboratorioGuiado3\LaboratorioGuiado3\GrafoGnr.h(130,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+C:\Users\Zuri\source\repos\LaboratorioGuiado3\LaboratorioGuiado3\GrafoGnr.h(127): message : al compilar la función del miembro clase plantilla "GrafoGnr<int>::GrafoGnr(int,double)"
+C:\Users\Zuri\source\repos\LaboratorioGuiado3\GrafoPruebas\test.cpp(29): message : Vea la referencia a la creación de una instancia de la función plantilla "GrafoGnr<int>::GrafoGnr(int,double)" que se está compilando
+C:\Users\Zuri\source\repos\LaboratorioGuiado3\LaboratorioGuiado3\GrafoGnr.h(237,23): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\Zuri\source\repos\LaboratorioGuiado3\LaboratorioGuiado3\GrafoGnr.h(234): message : al compilar la función del miembro clase plantilla "int GrafoGnr<int>::obtTotAdys(void) const"
+C:\Users\Zuri\source\repos\LaboratorioGuiado3\GrafoPruebas\test.cpp(70): message : Vea la referencia a la creación de una instancia de la función plantilla "int GrafoGnr<int>::obtTotAdys(void) const" que se está compilando
+  GrafoPruebas.vcxproj -> C:\Users\Zuri\source\repos\LaboratorioGuiado3\Debug\GrafoPruebas.exe
